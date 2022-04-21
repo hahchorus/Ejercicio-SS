@@ -6,19 +6,18 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-//import https.t4is_uv_mx.inventario.BorrarProductoResponse;
+
 import https.t4is_uv_mx.inventario.BuscarProductoResponse;
 import https.t4is_uv_mx.inventario.ModificarProductoRequest;
 import https.t4is_uv_mx.inventario.ModificarProductoResponse;
 import https.t4is_uv_mx.inventario.RegistrarProductoRequest;
 import https.t4is_uv_mx.inventario.RegistrarProductoResponse;
+import https.t4is_uv_mx.inventario.BorrarProductoResponse;
+import https.t4is_uv_mx.inventario.BorrarProductoRequest;
 
 //Todos los @ son anotaciones
 @Endpoint
 public class InventarioEndPoint {
-
-    //int contId = 1;
-    //List<Inventario> lista = new ArrayList<>();
 
     @Autowired
     Iinventario iinventario;
@@ -79,7 +78,7 @@ public class InventarioEndPoint {
         ModificarProductoResponse respuesta = new ModificarProductoResponse();
         Inventariox inventariox = new Inventariox();
         inventariox.setId(peticion.getId());
-        inventariox.setNombre(peticion.getNcodigo());
+        inventariox.setNombre(peticion.getNnombre());
         inventariox.setCodigo(peticion.getNcodigo());
         inventariox.setCantidad(peticion.getNcantidad());
         inventariox.setCosto(peticion.getNcosto());
@@ -98,26 +97,19 @@ public class InventarioEndPoint {
         
         return respuesta;
     }
-    
-    /*
-    @PayloadRoot(localPart = "BorrarProductoResponse", namespace = "https://t4is.uv.mx/inventario")
+
+    @PayloadRoot(localPart = "BorrarProductoRequest", namespace = "https://t4is.uv.mx/inventario")
     @ResponsePayload
-    public BorrarProductoResponse borrarproducto (@RequestPayload BorrarProductoResponse peticion) {
+    public BorrarProductoResponse eliminarproducto(@RequestPayload BorrarProductoRequest peticion){
         BorrarProductoResponse respuesta = new BorrarProductoResponse();
         respuesta.getInventario().clear();
 
-        iinventario.deleteById(peticion.getId());        
-        
-        respuesta.setId(peticion.getId());
-        respuesta.setNombre(peticion.getNombre());
-        respuesta.setCodigo(peticion.getCodigo());
-        respuesta.setCantidad(peticion.getCantidad());
-        respuesta.setCosto(peticion.getCodigo());
-        respuesta.setDescripcion(peticion.getDescripcion());
-        respuesta.setActivo(peticion.getActivo());
+        iinventario.deleteById(peticion.getId());
 
         return respuesta;
     }
-    */
+    
+    
+    
 
 }
